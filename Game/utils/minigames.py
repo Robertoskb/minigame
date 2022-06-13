@@ -29,7 +29,7 @@ class MiniGames:
     def collection(self):
         for v in self.items.values():
             print(v)
-            print(', '.join(map(str, v)), '\n')
+            print(', '.join(v), '\n')
 
         input('Enter para voltar: ')
         clear()

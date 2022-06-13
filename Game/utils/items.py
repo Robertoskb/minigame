@@ -11,7 +11,7 @@ class Item:
         self.rarity = f'{color}{rarity}\033[0;0m'
 
     def __str__(self):
-        return self.item
+        return str(self.item)
 
     def __repr__(self):
         return f'Item({self.item}, {self.rarity})'
