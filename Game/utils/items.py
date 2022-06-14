@@ -4,6 +4,58 @@ from os.path import relpath, dirname, join
 collectibles = JsonManager(join(dirname(relpath(__file__)), 'data/items.json')).read_json()
 
 
+class Items:
+
+    def __init__(self, key, items, color):
+        self.key = key
+        self.items = items
+        self.color = color
+
+    def __iter__(self):
+        for item in self.items:
+            yield item
+
+    def __getitem__(self, item):
+        return self.items[item]
+
+    def __len__(self):
+        return len(self.items)
+
+    def __repr__(self):
+        return f'{self.key}([{", ".join(map(str, self))}])'
+
+    def append(self, __object):
+        self.items.append(__object)
+
+    @property
+    def found(self):
+        return f'{self.color}{self.key} {len(self.items)}/{len(collectibles[self.key])}\033[0;0m'
+
+
+class CommonItems(Items):
+
+    def __init__(self, items):
+        Items.__init__(self, 'Comuns', list(map(CommonItem, items)), '\033[1;37m')
+
+
+class RareItems(Items):
+
+    def __init__(self, items):
+        Items.__init__(self, 'Raros', list(map(RareItem, items)), '\033[1;36m')
+
+
+class EpicItems(Items):
+
+    def __init__(self, items):
+        Items.__init__(self, 'Épicos', list(map(EpicItem, items)), '\033[1;34m')
+
+
+class LegendaryItems(Items):
+
+    def __init__(self, items):
+        Items.__init__(self, 'Lendários', list(map(LegendaryItem, items)), '\033[1;33m')
+
+
 class Item:
 
     def __init__(self, item, rarity, color):
@@ -16,44 +68,29 @@ class Item:
     def __repr__(self):
         return f'Item({self.item}, {self.rarity})'
 
-
-class Items:
-
-    def __init__(self, key, items, color):
-        self.key = key
-        self.items = items
-        self.color = color
-
-    def __iter__(self):
-        for item in self.items:
-            yield item
-
-    def __str__(self):
-        return f'{self.color}{self.key} {len(self.items)}/{len(collectibles[self.key])}\033[0;0m'
-
-    def __len__(self):
-        return len(self.items)
+    def __eq__(self, other):
+        return self.item == other
 
 
-class CommonItems(Items):
+class CommonItem(Item):
 
-    def __init__(self, items):
-        Items.__init__(self, 'Comuns', list(map(lambda i: Item(i, 'Comum', '\033[1;37m'), items)), '\033[1;37m')
-
-
-class RareItems(Items):
-
-    def __init__(self, items):
-        Items.__init__(self, 'Raros', list(map(lambda i: Item(i, 'Raro', '\033[1;36m'), items)), '\033[1;36m')
+    def __init__(self, item):
+        Item.__init__(self, item, 'Comum', '\033[1;37m')
 
 
-class EpicItems(Items):
+class RareItem(Item):
 
-    def __init__(self, items):
-        Items.__init__(self, 'Épicos', list(map(lambda i: Item(i, 'Épico', '\033[1;34m'), items)), '\033[1;34m')
+    def __init__(self, item):
+        Item.__init__(self, item, 'Raro', '\033[1;36m')
 
 
-class LegendaryItems(Items):
+class EpicItem(Item):
 
-    def __init__(self, items):
-        Items.__init__(self, 'Lendários', list(map(lambda i: Item(i, 'Lendário', '\033[1;33m'), items)), '\033[1;33m')
+    def __init__(self, item):
+        Item.__init__(self, item, 'Épico', '\033[1;34m')
+
+
+class LegendaryItem(Item):
+
+    def __init__(self, item):
+        Item.__init__(self, item, 'Lendário', '\033[1;33m')
