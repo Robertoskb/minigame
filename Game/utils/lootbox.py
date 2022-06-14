@@ -12,16 +12,17 @@ class LootBox:
         self.price = price
 
     def give_way(self, coins):
-        given = None
+        key, given = None, None
         msg = "Moedas insuficientes!"
 
         if coins >= self.price:
-            given = choice(collectibles[choices(list(collectibles.keys()), self.weights)[0]].items)
+            key = choices(list(collectibles.keys()), self.weights)[0]
+            given = choice(collectibles[key].items)
             msg = f"Você ganhou um item {given.rarity}!"
 
         print(msg)
 
-        return given
+        return key, given
 
 
 class CommonBox(LootBox):
@@ -48,4 +49,4 @@ class LegendaryBox(LootBox):
         LootBox.__init__(self, [2, 8, 40, 50])
 
 
-print(EpicBox().give_way(0))
+
