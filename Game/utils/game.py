@@ -38,14 +38,14 @@ class Game:
         profile = menu(self.data, True)
 
         if profile:
-            MiniGames(self.json_manager, profile, self.data[profile]).run()
+            MiniGames(self.json_manager, profile, self.data[profile]).menu()
 
     def create_profile(self):
         name = self._get_name()
 
         self.data[name] = {"moedas": 0, "itens": {"Comuns": [], "Raros": [], "Épicos": [], "Lendários": []}}
         self.json_manager.update_json(self.data)
-        MiniGames(self.json_manager, name, self.data[name]).run()
+        MiniGames(self.json_manager, name, self.data[name]).menu()
 
     def _get_name(self):
         name = input('nome: ').strip()

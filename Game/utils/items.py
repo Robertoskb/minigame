@@ -38,22 +38,22 @@ class Items:
 class CommonItems(Items):
 
     def __init__(self, items):
-        Items.__init__(self, 'Comuns', list(map(lambda i: Item(i, 'comum', '\033[1;37m'), items)), '\033[1;37m')
+        Items.__init__(self, 'Comuns', list(map(lambda i: Item(i, 'Comum', '\033[1;37m'), items)), '\033[1;37m')
 
 
 class RareItems(Items):
 
     def __init__(self, items):
-        Items.__init__(self, 'Raros', list(map(lambda i: Item(i, 'raro', '\033[1;36m'), items)), '\033[1;36m')
+        Items.__init__(self, 'Raros', list(map(lambda i: Item(i, 'Raro', '\033[1;36m'), items)), '\033[1;36m')
 
 
 class EpicItems(Items):
 
     def __init__(self, items):
-        Items.__init__(self, 'Épicos', list(map(lambda i: Item(i, 'épico', '\033[1;34m'), items)), '\033[1;34m')
+        Items.__init__(self, 'Épicos', list(map(lambda i: Item(i, 'Épico', '\033[1;34m'), items)), '\033[1;34m')
 
 
 class LegendaryItems(Items):
 
     def __init__(self, items):
-        Items.__init__(self, 'Lendários', list(map(lambda i: Item(i, 'lendário', '\033[1;33m'), items)), '\033[1;33m')
+        Items.__init__(self, 'Lendários', list(map(lambda i: Item(i, 'Lendário', '\033[1;33m'), items)), '\033[1;33m')

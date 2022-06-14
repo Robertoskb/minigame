@@ -1,16 +1,7 @@
-from Game.utils.items import CommonItems, RareItems, EpicItems, LegendaryItems, collectibles
+from Game.utils.items import collectibles
+from Game.utils.convert_items import convert_items
 from Game.utils.json_manager import JsonManager
 from Game.utils.menu import menu, clear
-
-
-def convert_items(data):
-    def convert(k, v):
-        return {'Comuns': CommonItems, 'Raros': RareItems,
-                'Épicos': EpicItems, 'Lendários': LegendaryItems}[k](v)
-
-    items = {k: convert(k, v) for k, v in data.items()}
-
-    return items
 
 
 class MiniGames:
@@ -21,7 +12,7 @@ class MiniGames:
         self.items = convert_items(data['itens'])
         self.json_manager = json_manager
 
-    def run(self):
+    def menu(self):
         while True:
             options = {'coleção': self.collection, 'salvar jogo': self.save_game, 'sair': exit}
             options[menu(options, head=self.progress)]()
