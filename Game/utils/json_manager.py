@@ -22,4 +22,3 @@ class JsonManager:
     def update_json(self, data):
         with open(self.filepath, 'w', encoding='utf-8') as f:
             dump(data, f, indent=2, separators=(',', ': '))
-

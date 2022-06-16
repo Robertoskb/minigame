@@ -31,7 +31,7 @@ class MiniGames(SaveGame):
 
     def menu(self):
         while True:
-            options = {'coleção': self.collection, 'loja': self.store, 'sair': exit}
+            options = {'jogar': self.play, 'coleção': self.collection, 'loja': self.store, 'sair': exit}
 
             options[menu(options, head=self.progress)]()
 
@@ -47,7 +47,7 @@ class MiniGames(SaveGame):
     def store(self):
         store = Store(self.coins)
 
-        for rarity, given, coins in store.purchases():
+        for rarity, given, coins in store.box_purchases():
             if rarity:
                 if given in self.items[rarity]:
                     print('Item repetido!\n')
@@ -56,6 +56,13 @@ class MiniGames(SaveGame):
                     print()
                     self.items[rarity].append(given)
 
+            self.coins = coins
+
+    @SaveGame.autosave
+    def play(self):
+        store = Store(self.coins)
+
+        for coins in store.match_purchases():
             self.coins = coins
 
     def save_game(self):
@@ -67,4 +74,4 @@ class MiniGames(SaveGame):
     @property
     def progress(self):
         def _sum(d): return sum((len(v) for v in d.values()))
-        return f'{self.name} \nprogresso: {int((_sum(self.items) / _sum(collectibles)) * 100)}%'
+        return f'{self.name}\nProgresso: {int((_sum(self.items) / _sum(collectibles)) * 100)}%\nMoedas: {self.coins}'

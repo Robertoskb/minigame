@@ -8,7 +8,7 @@ def clear():
 def menu(options, cancel=False, head=''):
     while True:
         if head: print(head)
-        if cancel: print('[0] - cancelar')
+        if cancel: print('[0] - voltar')
 
         for c, k in enumerate(options):
             print(f'[{c + 1}] - {k}')
