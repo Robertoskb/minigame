@@ -2,7 +2,7 @@ from Game.utils.items import collectibles
 from Game.utils.convert_items import convert_items
 from Game.utils.json_manager import JsonManager
 from Game.utils.menu import menu, clear
-from Game.utils.story import Store
+from Game.utils.store import Store
 
 
 class SaveGame:
