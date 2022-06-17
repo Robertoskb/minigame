@@ -4,7 +4,7 @@ from Game.utils.menu import menu
 
 
 def space(values, value):
-    return " " * (len(max(map(str, values), key=lambda b: len(b))) + 1 - len(str(value)))
+    return " " * (len(max(map(str, values), key=lambda v: len(v))) + 1 - len(str(value)))
 
 
 class Store:
