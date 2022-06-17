@@ -3,6 +3,10 @@ from Game.utils.random_number import Random10, Random100, Random1000, Random1000
 from Game.utils.menu import menu
 
 
+def space(values, value):
+    return " " * (len(max(map(str, values), key=lambda b: len(b))) + 1 - len(str(value)))
+
+
 class Store:
 
     def __init__(self, coins):
@@ -40,12 +44,10 @@ class Store:
     def _get_box_options():
         boxs = (CommonBox(), RareBox(), EpicBox(), LegendaryBox())
 
-        return {f'{box.name} - ({box.price} moedas)': box for box in boxs}
+        return {f'{box.name}{space(boxs, box)}({box.price} moedas)': box for box in boxs}
 
     @staticmethod
     def _get_match_options():
         matches = (Random10(), Random100(), Random1000(), Random10000())
 
-        def space(match): return " "*(len(max(map(str, matches))) + 1 - len(match.name))
-
-        return {f'{match.name}{space(match)}Preço/Prêmio: {match.price}/{match.award} moedas': match for match in matches}
+        return {f'{match.name}{space(matches, match)}Preço/Prêmio: {match.price}/{match.award} moedas': match for match in matches}

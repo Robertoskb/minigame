@@ -12,6 +12,9 @@ class LootBox:
         self.weights = weights
         self.price = price
 
+    def __str__(self):
+        return self.name
+
     def give_way(self, coins):
         key, given = None, None
         msg = "Moedas insuficientes!"
